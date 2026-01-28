@@ -14,7 +14,128 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      businesses: {
+        Row: {
+          amount_raised: number
+          category: string
+          created_at: string
+          description: string
+          detailed_description: string | null
+          duration_months: number
+          funding_goal: number
+          id: string
+          image_url: string | null
+          name: string
+          owner_id: string
+          risk_level: string
+          roi_percentage: number
+          status: string
+          updated_at: string
+        }
+        Insert: {
+          amount_raised?: number
+          category: string
+          created_at?: string
+          description: string
+          detailed_description?: string | null
+          duration_months: number
+          funding_goal: number
+          id?: string
+          image_url?: string | null
+          name: string
+          owner_id: string
+          risk_level: string
+          roi_percentage: number
+          status?: string
+          updated_at?: string
+        }
+        Update: {
+          amount_raised?: number
+          category?: string
+          created_at?: string
+          description?: string
+          detailed_description?: string | null
+          duration_months?: number
+          funding_goal?: number
+          id?: string
+          image_url?: string | null
+          name?: string
+          owner_id?: string
+          risk_level?: string
+          roi_percentage?: number
+          status?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      investments: {
+        Row: {
+          amount: number
+          business_id: string
+          created_at: string
+          id: string
+          investor_id: string
+          status: string
+        }
+        Insert: {
+          amount: number
+          business_id: string
+          created_at?: string
+          id?: string
+          investor_id: string
+          status?: string
+        }
+        Update: {
+          amount?: number
+          business_id?: string
+          created_at?: string
+          id?: string
+          investor_id?: string
+          status?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "investments_business_id_fkey"
+            columns: ["business_id"]
+            isOneToOne: false
+            referencedRelation: "businesses"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      profiles: {
+        Row: {
+          avatar_url: string | null
+          bio: string | null
+          created_at: string
+          email: string | null
+          full_name: string | null
+          id: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          avatar_url?: string | null
+          bio?: string | null
+          created_at?: string
+          email?: string | null
+          full_name?: string | null
+          id?: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          avatar_url?: string | null
+          bio?: string | null
+          created_at?: string
+          email?: string | null
+          full_name?: string | null
+          id?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never

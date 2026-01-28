@@ -7,9 +7,10 @@ interface FloatingCardProps {
   className?: string;
   delay?: number;
   intensity?: number;
+  onClick?: () => void;
 }
 
-export function FloatingCard({ children, className, delay = 0, intensity = 1 }: FloatingCardProps) {
+export function FloatingCard({ children, className, delay = 0, intensity = 1, onClick }: FloatingCardProps) {
   const x = useMotionValue(0);
   const y = useMotionValue(0);
 
@@ -45,7 +46,8 @@ export function FloatingCard({ children, className, delay = 0, intensity = 1 }: 
       }}
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
-      className={cn("glass-card cursor-pointer", className)}
+      onClick={onClick}
+      className={cn("glass-card", onClick && "cursor-pointer", className)}
     >
       {children}
     </motion.div>
