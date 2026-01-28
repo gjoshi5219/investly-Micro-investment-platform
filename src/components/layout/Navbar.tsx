@@ -1,11 +1,13 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { useNavigate } from "react-router-dom";
 import { MagneticButton } from "@/components/ui/magnetic-button";
+import { useAuth } from "@/contexts/AuthContext";
 import { Menu, X } from "lucide-react";
 
 const navLinks = [
   { label: "How It Works", href: "#how-it-works" },
-  { label: "Businesses", href: "#businesses" },
+  { label: "Businesses", href: "/businesses" },
   { label: "Why Investly", href: "#why-investly" },
   { label: "Security", href: "#security" },
 ];
@@ -13,6 +15,8 @@ const navLinks = [
 export function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const { user, loading } = useAuth();
+  const navigate = useNavigate();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -21,6 +25,18 @@ export function Navbar() {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  const handleNavClick = (href: string) => {
+    setIsMobileMenuOpen(false);
+    if (href.startsWith("#")) {
+      const element = document.querySelector(href);
+      if (element) {
+        element.scrollIntoView({ behavior: "smooth" });
+      }
+    } else {
+      navigate(href);
+    }
+  };
 
   return (
     <>
@@ -37,7 +53,7 @@ export function Navbar() {
         <div className="container px-4">
           <nav className="flex items-center justify-between">
             {/* Logo */}
-            <a href="#" className="flex items-center gap-2">
+            <a href="/" className="flex items-center gap-2">
               <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-primary to-secondary flex items-center justify-center">
                 <span className="text-xl font-bold text-white font-display">I</span>
               </div>
@@ -47,24 +63,44 @@ export function Navbar() {
             {/* Desktop Nav */}
             <div className="hidden md:flex items-center gap-8">
               {navLinks.map((link) => (
-                <a
+                <button
                   key={link.href}
-                  href={link.href}
+                  onClick={() => handleNavClick(link.href)}
                   className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors duration-200"
                 >
                   {link.label}
-                </a>
+                </button>
               ))}
             </div>
 
             {/* Desktop CTA */}
             <div className="hidden md:flex items-center gap-3">
-              <MagneticButton variant="ghost" size="sm">
-                Log In
-              </MagneticButton>
-              <MagneticButton variant="primary" size="sm">
-                Get Started
-              </MagneticButton>
+              {loading ? null : user ? (
+                <MagneticButton
+                  variant="primary"
+                  size="sm"
+                  onClick={() => navigate("/dashboard")}
+                >
+                  Dashboard
+                </MagneticButton>
+              ) : (
+                <>
+                  <MagneticButton
+                    variant="ghost"
+                    size="sm"
+                    onClick={() => navigate("/auth")}
+                  >
+                    Log In
+                  </MagneticButton>
+                  <MagneticButton
+                    variant="primary"
+                    size="sm"
+                    onClick={() => navigate("/auth")}
+                  >
+                    Get Started
+                  </MagneticButton>
+                </>
+              )}
             </div>
 
             {/* Mobile Menu Button */}
@@ -91,23 +127,54 @@ export function Navbar() {
             <div className="bg-background/95 backdrop-blur-xl border-b border-border p-6">
               <div className="flex flex-col gap-4">
                 {navLinks.map((link) => (
-                  <a
+                  <button
                     key={link.href}
-                    href={link.href}
-                    onClick={() => setIsMobileMenuOpen(false)}
-                    className="text-lg font-medium text-foreground py-2"
+                    onClick={() => handleNavClick(link.href)}
+                    className="text-lg font-medium text-foreground py-2 text-left"
                   >
                     {link.label}
-                  </a>
+                  </button>
                 ))}
                 <hr className="border-border my-2" />
                 <div className="flex flex-col gap-3">
-                  <MagneticButton variant="ghost" size="md" className="w-full justify-center">
-                    Log In
-                  </MagneticButton>
-                  <MagneticButton variant="primary" size="md" className="w-full justify-center">
-                    Get Started
-                  </MagneticButton>
+                  {loading ? null : user ? (
+                    <MagneticButton
+                      variant="primary"
+                      size="md"
+                      className="w-full justify-center"
+                      onClick={() => {
+                        setIsMobileMenuOpen(false);
+                        navigate("/dashboard");
+                      }}
+                    >
+                      Dashboard
+                    </MagneticButton>
+                  ) : (
+                    <>
+                      <MagneticButton
+                        variant="ghost"
+                        size="md"
+                        className="w-full justify-center"
+                        onClick={() => {
+                          setIsMobileMenuOpen(false);
+                          navigate("/auth");
+                        }}
+                      >
+                        Log In
+                      </MagneticButton>
+                      <MagneticButton
+                        variant="primary"
+                        size="md"
+                        className="w-full justify-center"
+                        onClick={() => {
+                          setIsMobileMenuOpen(false);
+                          navigate("/auth");
+                        }}
+                      >
+                        Get Started
+                      </MagneticButton>
+                    </>
+                  )}
                 </div>
               </div>
             </div>
