@@ -19,6 +19,7 @@ import {
 } from "@/components/ui/select";
 import { ArrowLeft } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
+import { sanitizeError } from "@/lib/error-utils";
 import { z } from "zod";
 
 const businessSchema = z.object({
@@ -117,10 +118,10 @@ export default function ListBusiness() {
         description: "Your business is now live and ready for investments.",
       });
       navigate("/dashboard");
-    } catch (error: any) {
+    } catch (error: unknown) {
       toast({
         title: "Error",
-        description: error.message || "Failed to list business.",
+        description: sanitizeError(error, "Failed to list business. Please try again."),
         variant: "destructive",
       });
     } finally {

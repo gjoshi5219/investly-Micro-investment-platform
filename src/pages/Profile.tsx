@@ -13,6 +13,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { ArrowLeft, User } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
+import { sanitizeError, devError } from "@/lib/error-utils";
 
 interface Profile {
   id: string;
@@ -66,7 +67,7 @@ export default function ProfilePage() {
         });
       }
     } catch (error) {
-      console.error("Error fetching profile:", error);
+      devError("Error fetching profile:", error);
     } finally {
       setLoading(false);
     }
@@ -93,10 +94,10 @@ export default function ProfilePage() {
         description: "Your profile has been saved successfully.",
       });
       fetchProfile();
-    } catch (error: any) {
+    } catch (error: unknown) {
       toast({
         title: "Error",
-        description: error.message || "Failed to update profile.",
+        description: sanitizeError(error, "Failed to update profile. Please try again."),
         variant: "destructive",
       });
     } finally {

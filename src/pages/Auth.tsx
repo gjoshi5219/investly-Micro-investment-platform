@@ -7,6 +7,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Eye, EyeOff, ArrowLeft } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
+import { sanitizeError } from "@/lib/error-utils";
 import { z } from "zod";
 
 const signUpSchema = z.object({
@@ -63,19 +64,11 @@ export default function Auth() {
 
         const { error } = await signUp(formData.email, formData.password, formData.fullName);
         if (error) {
-          if (error.message.includes("already registered")) {
-            toast({
-              title: "Account exists",
-              description: "This email is already registered. Please sign in instead.",
-              variant: "destructive",
-            });
-          } else {
-            toast({
-              title: "Sign up failed",
-              description: error.message,
-              variant: "destructive",
-            });
-          }
+          toast({
+            title: "Sign up failed",
+            description: sanitizeError(error, "Unable to create account. Please try again."),
+            variant: "destructive",
+          });
         } else {
           toast({
             title: "Welcome to Investly!",

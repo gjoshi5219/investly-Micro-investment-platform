@@ -8,6 +8,7 @@ import { FloatingCard } from "@/components/ui/floating-card";
 import { MagneticButton } from "@/components/ui/magnetic-button";
 import { SectionWrapper, SectionHeader } from "@/components/ui/section-wrapper";
 import { TrendingUp, Clock, Users, ArrowUpRight } from "lucide-react";
+import { devError } from "@/lib/error-utils";
 
 interface Business {
   id: string;
@@ -57,7 +58,7 @@ export default function Businesses() {
       if (error) throw error;
       setBusinesses(data || []);
     } catch (error) {
-      console.error("Error fetching businesses:", error);
+      devError("Error fetching businesses:", error);
     } finally {
       setLoading(false);
     }

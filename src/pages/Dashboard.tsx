@@ -17,6 +17,7 @@ import {
   LogOut,
 } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
+import { devError } from "@/lib/error-utils";
 
 interface Profile {
   id: string;
@@ -112,7 +113,7 @@ export default function Dashboard() {
         setMyBusinesses(businessData);
       }
     } catch (error) {
-      console.error("Error fetching data:", error);
+      devError("Error fetching dashboard data:", error);
     } finally {
       setLoading(false);
     }
