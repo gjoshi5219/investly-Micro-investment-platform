@@ -18,6 +18,7 @@ import {
   DollarSign,
 } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
+import { sanitizeError, devError } from "@/lib/error-utils";
 
 interface Business {
   id: string;
@@ -76,7 +77,7 @@ export default function BusinessDetail() {
         setInvestorCount(count || 0);
       }
     } catch (error) {
-      console.error("Error fetching business:", error);
+      devError("Error fetching business:", error);
       toast({
         title: "Error",
         description: "Failed to load business details.",
@@ -136,10 +137,10 @@ export default function BusinessDetail() {
       // Refresh business data
       fetchBusiness();
       setInvestAmount("");
-    } catch (error: any) {
+    } catch (error: unknown) {
       toast({
         title: "Investment failed",
-        description: error.message || "Something went wrong.",
+        description: sanitizeError(error, "Unable to process investment. Please try again."),
         variant: "destructive",
       });
     } finally {
