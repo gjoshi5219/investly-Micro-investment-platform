@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { MagneticButton } from "@/components/ui/magnetic-button";
 import { useAuth } from "@/contexts/AuthContext";
 import { Menu, X } from "lucide-react";
@@ -17,6 +17,7 @@ export function Navbar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const { user, loading } = useAuth();
   const navigate = useNavigate();
+  const location = useLocation();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -29,9 +30,15 @@ export function Navbar() {
   const handleNavClick = (href: string) => {
     setIsMobileMenuOpen(false);
     if (href.startsWith("#")) {
-      const element = document.querySelector(href);
-      if (element) {
-        element.scrollIntoView({ behavior: "smooth" });
+      // If we're on the homepage, scroll to the section
+      if (location.pathname === "/") {
+        const element = document.querySelector(href);
+        if (element) {
+          element.scrollIntoView({ behavior: "smooth" });
+        }
+      } else {
+        // If we're on another page, navigate to homepage with hash
+        navigate("/" + href);
       }
     } else {
       navigate(href);
