@@ -14,10 +14,57 @@ export type Database = {
   }
   public: {
     Tables: {
+      business_verifications: {
+        Row: {
+          business_id: string
+          document_type: string
+          document_url: string
+          id: string
+          reviewed_at: string | null
+          reviewed_by: string | null
+          reviewer_notes: string | null
+          status: string | null
+          uploaded_at: string | null
+        }
+        Insert: {
+          business_id: string
+          document_type: string
+          document_url: string
+          id?: string
+          reviewed_at?: string | null
+          reviewed_by?: string | null
+          reviewer_notes?: string | null
+          status?: string | null
+          uploaded_at?: string | null
+        }
+        Update: {
+          business_id?: string
+          document_type?: string
+          document_url?: string
+          id?: string
+          reviewed_at?: string | null
+          reviewed_by?: string | null
+          reviewer_notes?: string | null
+          status?: string | null
+          uploaded_at?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "business_verifications_business_id_fkey"
+            columns: ["business_id"]
+            isOneToOne: false
+            referencedRelation: "businesses"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       businesses: {
         Row: {
           amount_raised: number
+          business_tier: string | null
           category: string
+          city: string | null
+          country: string | null
           created_at: string
           description: string
           detailed_description: string | null
@@ -25,16 +72,27 @@ export type Database = {
           funding_goal: number
           id: string
           image_url: string | null
+          is_remote: boolean | null
+          listing_fee_paid: boolean | null
+          location: string | null
           name: string
           owner_id: string
+          promo_code_used: string | null
           risk_level: string
           roi_percentage: number
           status: string
+          stripe_payment_id: string | null
           updated_at: string
+          verification_documents: string[] | null
+          verification_notes: string | null
+          verification_status: string | null
         }
         Insert: {
           amount_raised?: number
+          business_tier?: string | null
           category: string
+          city?: string | null
+          country?: string | null
           created_at?: string
           description: string
           detailed_description?: string | null
@@ -42,16 +100,27 @@ export type Database = {
           funding_goal: number
           id?: string
           image_url?: string | null
+          is_remote?: boolean | null
+          listing_fee_paid?: boolean | null
+          location?: string | null
           name: string
           owner_id: string
+          promo_code_used?: string | null
           risk_level: string
           roi_percentage: number
           status?: string
+          stripe_payment_id?: string | null
           updated_at?: string
+          verification_documents?: string[] | null
+          verification_notes?: string | null
+          verification_status?: string | null
         }
         Update: {
           amount_raised?: number
+          business_tier?: string | null
           category?: string
+          city?: string | null
+          country?: string | null
           created_at?: string
           description?: string
           detailed_description?: string | null
@@ -59,12 +128,20 @@ export type Database = {
           funding_goal?: number
           id?: string
           image_url?: string | null
+          is_remote?: boolean | null
+          listing_fee_paid?: boolean | null
+          location?: string | null
           name?: string
           owner_id?: string
+          promo_code_used?: string | null
           risk_level?: string
           roi_percentage?: number
           status?: string
+          stripe_payment_id?: string | null
           updated_at?: string
+          verification_documents?: string[] | null
+          verification_notes?: string | null
+          verification_status?: string | null
         }
         Relationships: []
       }
@@ -107,32 +184,83 @@ export type Database = {
         Row: {
           avatar_url: string | null
           bio: string | null
+          country_code: string | null
           created_at: string
+          currency_code: string | null
           email: string | null
           full_name: string | null
           id: string
+          phone_number: string | null
+          phone_verified: boolean | null
           updated_at: string
           user_id: string
         }
         Insert: {
           avatar_url?: string | null
           bio?: string | null
+          country_code?: string | null
           created_at?: string
+          currency_code?: string | null
           email?: string | null
           full_name?: string | null
           id?: string
+          phone_number?: string | null
+          phone_verified?: boolean | null
           updated_at?: string
           user_id: string
         }
         Update: {
           avatar_url?: string | null
           bio?: string | null
+          country_code?: string | null
           created_at?: string
+          currency_code?: string | null
           email?: string | null
           full_name?: string | null
           id?: string
+          phone_number?: string | null
+          phone_verified?: boolean | null
           updated_at?: string
           user_id?: string
+        }
+        Relationships: []
+      }
+      promo_codes: {
+        Row: {
+          code: string
+          created_at: string | null
+          created_by: string | null
+          current_uses: number | null
+          discount_percentage: number | null
+          id: string
+          is_active: boolean | null
+          max_uses: number | null
+          valid_from: string | null
+          valid_until: string | null
+        }
+        Insert: {
+          code: string
+          created_at?: string | null
+          created_by?: string | null
+          current_uses?: number | null
+          discount_percentage?: number | null
+          id?: string
+          is_active?: boolean | null
+          max_uses?: number | null
+          valid_from?: string | null
+          valid_until?: string | null
+        }
+        Update: {
+          code?: string
+          created_at?: string | null
+          created_by?: string | null
+          current_uses?: number | null
+          discount_percentage?: number | null
+          id?: string
+          is_active?: boolean | null
+          max_uses?: number | null
+          valid_from?: string | null
+          valid_until?: string | null
         }
         Relationships: []
       }
