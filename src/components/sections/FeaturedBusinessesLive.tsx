@@ -66,8 +66,7 @@ export function FeaturedBusinessesLive() {
       <div className="container px-4">
         <SectionHeader
           badge="Featured Opportunities"
-          title="Businesses ready for your investment"
-          description="Each business is vetted by our team. We only feature ventures with solid fundamentals and clear growth potential."
+          title="Discover investment opportunities"
         />
 
         {loading ? (
