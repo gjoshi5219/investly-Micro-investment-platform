@@ -1,73 +1,141 @@
-# Welcome to your Lovable project
+Investly — Private Investment Discovery Platform
 
-## Project info
+Investly is a curated, compliance-aware investment discovery & community platform focused on surfacing high-signal private opportunities.
+It is designed as a trust-first, education-led private network, not an open marketplace or trading platform.
 
-**URL**: https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID
+The platform prioritizes:
 
-## How can I edit this code?
+Quality over volume
 
-There are several ways of editing your application.
+Curation over listings
 
-**Use Lovable**
+Signal over hype
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and start prompting.
+Community before capital
 
-Changes made via Lovable will be committed automatically to this repo.
+Note: This repository reflects the current production code synced with Lovable.
 
-**Use your preferred IDE**
+🧠 Core Concept
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+Investly does not directly facilitate investments or transactions
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+It acts as a technology & discovery layer
 
-Follow these steps:
+Opportunities are vetted, structured, and presented for informed decision-making
 
-```sh
-# Step 1: Clone the repository using the project's Git URL.
+Access is intentionally gated to maintain signal quality
+
+🛠️ Tech Stack
+
+Vite
+
+TypeScript
+
+React
+
+Tailwind CSS
+
+shadcn/ui
+
+Supabase (auth, data, access control)
+
+Built for:
+
+Performance-first delivery
+
+Modern UI/UX
+
+Scalable iteration
+
+✏️ How to Edit the Project
+
+You can work on this project in multiple ways depending on your workflow.
+
+1. Edit via Lovable (Visual + Prompt-Based)
+
+Open the project in Lovable
+
+Make changes using prompts or visual edits
+
+Changes are automatically committed to this repository
+
+Best for:
+
+UI iterations
+
+Layout refinements
+
+Rapid prototyping
+
+2. Edit Locally Using Your IDE (Recommended for Dev Work)
+Prerequisites
+
+Node.js (via nvm recommended)
+
+npm
+
+Steps
+# Clone the repository
 git clone <YOUR_GIT_URL>
 
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
+# Navigate to the project directory
+cd investly-micro-investment-platform
 
-# Step 3: Install the necessary dependencies.
-npm i
+# Install dependencies
+npm install
 
-# Step 4: Start the development server with auto-reloading and an instant preview.
+# Start the development server
 npm run dev
-```
 
-**Edit a file directly in GitHub**
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+Local changes pushed to GitHub will automatically sync with Lovable.
 
-**Use GitHub Codespaces**
+3. Edit Directly on GitHub
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+Open any file in the repository
 
-## What technologies are used for this project?
+Click the ✏️ Edit button
 
-This project is built with:
+Commit changes directly
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+Useful for:
 
-## How can I deploy this project?
+Quick copy updates
 
-Simply open [Lovable](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and click on Share -> Publish.
+README or config tweaks
 
-## Can I connect a custom domain to my Lovable project?
+4. Use GitHub Codespaces
 
-Yes, you can!
+Open the repository
 
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
+Click Code → Codespaces
 
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/features/custom-domain#custom-domain)
+Launch a new Codespace
+
+Edit, commit, and push changes
+
+🚀 Deployment
+
+Deployment is handled via Lovable:
+
+Open the project in Lovable
+
+Click Share → Publish
+
+Your site is live instantly
+
+🌍 Custom Domain Support
+
+You can connect a custom domain:
+
+Go to Project → Settings → Domains
+
+Click Connect Domain
+
+Documentation:
+https://docs.lovable.dev/features/custom-domain#custom-domain
+
+⚠️ Disclaimer
+
+Investly does not provide investment advice, brokerage services, or execute securities transactions.
+All content is for informational and educational purposes only. Participation in any opportunity is at the user’s own discretion and risk.
